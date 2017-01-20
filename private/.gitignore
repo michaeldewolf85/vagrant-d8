@@ -1,0 +1,5 @@
+# Local configs
+config.yml
+
+# Vagrant session
+.vagrant
