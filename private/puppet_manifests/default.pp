@@ -170,7 +170,9 @@ class drupal {
         "remove-docroot":
             command => '/bin/rm -rf /vagrant/docroot';
         "build-drupal":
-            command => '/usr/local/bin/composer create-project drupal/drupal /vagrant/docroot',
+            command => '/usr/local/bin/composer create-project drupal/drupal /vagrant/docroot --keep-vcs',
+            environment => ["COMPOSER_PROCESS_TIMEOUT=6000", "COMPOSER_HOME=/home/vagrant/.composer"],
+            timeout => 6000,
             require => Exec['remove-docroot'];
         "install-drupal":
             command => '/home/vagrant/.composer/vendor/bin/drush site-install --db-url=mysql://vagrant:vagrant@localhost:3306/vagrant --account-name=admin --account-pass=admin --site-name=D8 -y',
